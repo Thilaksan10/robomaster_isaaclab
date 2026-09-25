@@ -1,0 +1,9 @@
+{
+    "total": 4,
+    "per_edgecase": {
+        "Changing Velocities": 1,
+        "Circle Small Radius": 1,
+        "Connected U-Curves (5)": 0,
+        "Connected U-Curves (8)": 2
+    }
+}

@@ -1,0 +1,12 @@
+/logs
+/outputs
+/.vscode
+__pycache__/
+*.pyc
+/records*
+/trajectories*
+*.txt
+/assets
+*.csv
+/multiple*
+/record*

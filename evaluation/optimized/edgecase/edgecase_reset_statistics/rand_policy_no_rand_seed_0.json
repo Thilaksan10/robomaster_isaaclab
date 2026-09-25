@@ -1,0 +1,25 @@
+{
+    "total": 101,
+    "per_edgecase": {
+        "Changing Velocities": 2,
+        "Circle Big Radius": 3,
+        "Circle Small Radius": 3,
+        "Connected U-Curves (3)": 3,
+        "Connected U-Curves (4)": 5,
+        "Connected U-Curves (5)": 6,
+        "Connected U-Curves (6)": 7,
+        "Connected U-Curves (7)": 5,
+        "Connected U-Curves (8)": 7,
+        "Connected U-Curves (9)": 11,
+        "Fixed Orientation -90\u00b0": 4,
+        "Fixed Orientation 0\u00b0": 4,
+        "Fixed Orientation 180\u00b0": 11,
+        "Fixed Orientation 45\u00b0": 6,
+        "Fixed Orientation 90\u00b0": 5,
+        "Left Curve 180\u00b0": 5,
+        "Left Curve 90\u00b0": 3,
+        "Right Curve 180\u00b0": 4,
+        "Right Curve 90\u00b0": 3,
+        "Zigzag Lateral Motion": 4
+    }
+}

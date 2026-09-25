@@ -1,0 +1,152 @@
+# if given, will override the device setting in gym.
+name: robomaster
+
+env:
+  numEnvs: 2048
+  envSpacing: 2
+  episodeLength: 2000
+  commandLength: 2000
+  enableDebugVis: False
+  recordData: False
+  keyboardAgent: False
+  playbackData: False
+  optimize: False
+  recordVelData: False
+  playbackVelData: False
+
+  startPositionNoise: 0.0
+  startRotationNoise: 1.0
+
+  # 3 ---> z scaler 4.85
+  controlFrequencyInv: 8
+
+  # queue length of recorded observations
+  frameStack: 1
+  actionObsHistory: 50
+  actionRate: 1.0
+  maxVelocity: 70. # Rad/s
+  # maxAcceleration: [0.07, 0.61, 0.55, 0.26]
+  maxAcceleration: [2.5, 2.5, 2.5, 2.5]
+  # maxAcceleration: [ 0.23, 0.26, 0.21, 0.1 ] # New parameter
+  # maxAcceleration: [0.12, 0.09, 0.07, 0.07]
+  # [0.14 0.16 0.06 0.04]
+
+
+  randomCommandVelocityRanges:
+    linear_x: [-1., 1.] # min max [m/s]
+    linear_y: [-1., 1.]   # min max [m/s]
+    yaw: [-3.14, 3.14]    # min max [rad/s]
+
+  plane:
+    staticFriction: 1.0
+    dynamicFriction: 1.0
+    restitution: 0.0
+
+  asset:
+    assetRoot: "./assets"
+    # assetFileName: "urdf2/robomaster.urdf"
+    assetFileName: "urdf/ep_description/urdf/ep_description_original(V0).urdf"
+
+  learn:
+
+    # rewards
+    terminalReward: 0.0
+    linearVelocityXRewardScale: 0.5
+    linearVelocityYRewardScale: 0.5
+    linearVelocityXYRewardScale: 2.0
+    angularVelocityZRewardScale: 1.0
+    wheelRewardScale: 2.5
+    orientationXRewardScale: 0.5
+    orientationYRewardScale: 0.5
+    orientationRewardScale: 2.5
+    progressRewardScale: 1.0
+    offRoadReward: -500
+    stationaryReward: -1
+    actionRateRewardScale: -0.01
+    # orient: 0.5
+    smoothness: 0.1
+    # off_track: -10.0
+    survival: 0.05
+    baseVelocityScale: 2.
+    wheelVelocityScale: 0.
+
+    # normalization
+    linearVelocityXScale: 2.
+    linearVelocityYScale: 2.
+    angularVelocityScale: 2.
+
+    # noise 
+    addNoise: False
+    noiseLevel: 1.0 # scales other values
+    linearVelocityNoise: 0.001
+    angularVelocityNoise: 0.03
+    gravityNoise: 0.0002
+
+sim:
+  substeps: 2
+
+  physx:
+    num_threads: 4
+    solver_type: 1  # 0: pgs, 1: tgs
+    num_position_iterations: 4
+    num_velocity_iterations: 0
+    contact_offset: 0.005
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.1
+    max_depenetration_velocity: 0.1
+    default_buffer_size_multiplier: 50.0
+    max_gpu_contact_pairs: 1048576
+
+  flex:
+    num_outer_iterations: 4
+    num_inner_iterations: 6
+    warm_start: 0.25
+
+task:
+  randomize: True
+  randomization_params:
+    # specify which attributes to randomize for each actor type and property
+    frequency: 200   # Define how many environment steps between generating new randomizations
+    actions:
+      range: [0.0, 0.1]
+      operation: "additive"
+      distribution: "gaussian"
+      schedule: "linear"  # "linear" will linearly interpolate between no rand and max rand
+      schedule_steps: 5000
+    actor_params:
+      robomaster:
+        color: True
+        rigid_body_properties:
+          mass: 
+            range: [0.85, 1.5]
+            operation: "scaling"
+            distribution: "uniform"
+            schedule: "linear"
+            schedule_steps: 50
+        rigid_shape_properties:
+          thickness:
+            range: [0.95, 1.05]
+            operation: "scaling"
+            distribution: "uniform"
+            schedule: "linear"
+            schedule_steps: 5
+          friction:
+            num_buckets: 250
+            range: [ 0.7, 1.3 ]
+            operation: "scaling"
+            distribution: "uniform"
+            schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+            schedule_steps: 30000
+        dof_properties:
+          stiffness:
+            range: [ 0.75, 1.25 ]
+            operation: "scaling"
+            distribution: "uniform"
+            schedule: "linear"
+            schedule_steps: 50
+          damping:
+            range: [ 7.5, 12.5 ]
+            operation: "scaling"
+            distribution: "uniform"
+            schedule: "linear"
+            schedule_steps: 50

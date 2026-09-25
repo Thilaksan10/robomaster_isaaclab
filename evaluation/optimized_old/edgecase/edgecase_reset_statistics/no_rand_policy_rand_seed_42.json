@@ -1,0 +1,21 @@
+{
+    "total": 5,
+    "per_edgecase": {
+        "changing_velocity_profiles": 0,
+        "circle_big_radius": 0,
+        "circle_small_radius": 0,
+        "connected_u_curves_2": 1,
+        "connected_u_curves_3": 0,
+        "connected_u_curves_4": 0,
+        "connected_u_curves_5": 0,
+        "curve_left_180": 0,
+        "curve_left_90": 1,
+        "curve_right_180": 0,
+        "curve_right_90": 0,
+        "forward_fixed_orientation_-90deg": 1,
+        "forward_fixed_orientation_0deg": 1,
+        "forward_fixed_orientation_180deg": 0,
+        "forward_fixed_orientation_45deg": 1,
+        "zigzag_lateral_motion": 0
+    }
+}
